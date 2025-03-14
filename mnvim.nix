@@ -1,4 +1,5 @@
 { lib
+, pkgs
 , neovimUtils
 , vimPlugins
 , wrapNeovimUnstable
@@ -46,6 +47,7 @@ let
     nodePackages.typescript-language-server
     pyright
     shellcheck
+    pkgs.verible
     zig
     zls
   ];

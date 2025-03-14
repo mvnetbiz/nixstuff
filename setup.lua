@@ -7,6 +7,9 @@ lspconfig.gopls.setup {}
 lspconfig.nixd.setup {}
 lspconfig.pyright.setup {}
 lspconfig.tsserver.setup {}
+lspconfig.verible.setup {
+    cmd = {'verible-verilog-ls', '--rules_config_search'},
+}
 lspconfig.zls.setup {}
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
