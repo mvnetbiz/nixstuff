@@ -8,6 +8,7 @@
 , clang-tools
 , gopls
 , nixd
+, nixfmt-rfc-style
 , nodePackages
 , pyright
 , shellcheck
@@ -44,6 +45,7 @@ let
     clang-tools
     gopls
     nixd
+    nixfmt-rfc-style
     nodePackages.typescript-language-server
     pyright
     shellcheck
