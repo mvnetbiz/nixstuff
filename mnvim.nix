@@ -21,6 +21,7 @@ let
     withNodeJs = false;
     plugins = with vimPlugins; [
       bufferline-nvim
+      guess-indent-nvim
       lualine-lsp-progress
       lualine-nvim
       neo-tree-nvim

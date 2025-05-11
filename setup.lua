@@ -100,3 +100,7 @@ require("bufferline").setup {}
 
 -- orgmode
 require("orgmode").setup {}
+
+-- guess indentation settings
+require('guess-indent').setup {}
+
