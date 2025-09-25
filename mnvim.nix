@@ -37,9 +37,7 @@ let
       vim-nftables
       vim-signify
     ];
-    luaRcContent = ''
-      dofile('${./setup.lua}')
-    '';
+    customLuaRC = builtins.readFile ./setup.lua;
     customRC = builtins.readFile ./setup.vim;
   };
   extraPackages = [
