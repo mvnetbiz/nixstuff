@@ -6,7 +6,7 @@ lspconfig.elmls.setup {}
 lspconfig.gopls.setup {}
 lspconfig.nixd.setup {}
 lspconfig.pyright.setup {}
-lspconfig.tsserver.setup {}
+lspconfig.ts_ls.setup {}
 lspconfig.verible.setup {
     cmd = {'verible-verilog-ls', '--rules_config_search'},
 }
