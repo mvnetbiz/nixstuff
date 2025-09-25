@@ -107,6 +107,15 @@ require("orgmode").setup {}
 -- guess indentation settings
 require('guess-indent').setup {}
 
+-- aerial outline
+require("aerial").setup({
+  on_attach = function(bufnr)
+    vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+  end,
+})
+vim.keymap.set("n", "<space>a", "<cmd>AerialToggle!<CR>")
+
 -- theme
 vim.o.background = "dark" -- or "light" for light mode
 vim.cmd([[colorscheme gruvbox]])

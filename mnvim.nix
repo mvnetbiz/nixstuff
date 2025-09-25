@@ -22,6 +22,7 @@ let
     withRuby = false;
     withNodeJs = false;
     plugins = with vimPlugins; [
+      aerial-nvim
       bufferline-nvim
       gruvbox-nvim
       guess-indent-nvim
