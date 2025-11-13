@@ -24,5 +24,6 @@
       packages = lib.genAttrs systems (
         system: (lib.filterAttrs (n: v: lib.isDerivation v)) pkgs.${system}.myPkgs
       );
+      legacyPackages = pkgs;
     };
 }
