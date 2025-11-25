@@ -25,6 +25,7 @@ let
       aerial-nvim
       bufferline-nvim
       gruvbox-nvim
+      gruvbox-material
       guess-indent-nvim
       lualine-lsp-progress
       lualine-nvim
@@ -34,6 +35,7 @@ let
       nvim-web-devicons
       orgmode
       plenary-nvim
+      sonokai
       vim-nftables
       vim-signify
     ];

@@ -33,3 +33,5 @@ nnoremap <A-L> <C-w>L
 
 nmap <C-CR> :term <CR>
 nmap <leader>K :Man<CR>
+
+colorscheme gruvbox-material

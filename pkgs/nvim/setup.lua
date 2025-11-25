@@ -1,16 +1,19 @@
--- lspconfig
-local lspconfig = require('lspconfig')
-lspconfig.bashls.setup {}
-lspconfig.clangd.setup {}
-lspconfig.elmls.setup {}
-lspconfig.gopls.setup {}
-lspconfig.nixd.setup {}
-lspconfig.pyright.setup {}
-lspconfig.ts_ls.setup {}
-lspconfig.verible.setup {
+vim.lsp.config('verible', {
     cmd = {'verible-verilog-ls', '--rules_config_search'},
-}
-lspconfig.zls.setup {}
+})
+
+vim.lsp.enable({
+  'bashls',
+  'clangd',
+  'elmls',
+  'gopls',
+  'nixd',
+  'pyright',
+  'ts_ls',
+  'verible',
+  'zls',
+})
+
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
@@ -115,7 +118,3 @@ require("aerial").setup({
   end,
 })
 vim.keymap.set("n", "<space>a", "<cmd>AerialToggle!<CR>")
-
--- theme
-vim.o.background = "dark" -- or "light" for light mode
-vim.cmd([[colorscheme gruvbox]])
