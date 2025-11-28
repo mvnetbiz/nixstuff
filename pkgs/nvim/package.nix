@@ -24,6 +24,7 @@ let
     plugins = with vimPlugins; [
       aerial-nvim
       bufferline-nvim
+      conform-nvim
       gruvbox-nvim
       gruvbox-material
       guess-indent-nvim
