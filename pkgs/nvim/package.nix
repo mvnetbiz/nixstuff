@@ -1,20 +1,14 @@
 { lib
-, pkgs
 , neovimUtils
 , vimPlugins
 , wrapNeovimUnstable
 , neovim-unwrapped
 , bash-language-server
-, clang-tools
 , fd
-, gopls
 , nixd
 , nixfmt-rfc-style
-, nodePackages
 , pyright
 , shellcheck
-, zig
-, zls
 }:
 let
   conf = neovimUtils.makeNeovimConfig {
@@ -48,17 +42,11 @@ let
   };
   extraPackages = [
     bash-language-server
-    clang-tools
     fd
-    gopls
     nixd
     nixfmt-rfc-style
-    nodePackages.typescript-language-server
-    pkgs.verible
     pyright
     shellcheck
-    zig
-    zls
   ];
   extraMakeWrapperArgs = lib.optionalString (extraPackages != [ ])
     ''--suffix PATH : "${lib.makeBinPath extraPackages}"'';
