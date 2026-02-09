@@ -6,6 +6,7 @@
 , neovim-unwrapped
 , bash-language-server
 , clang-tools
+, fd
 , gopls
 , nixd
 , nixfmt-rfc-style
@@ -37,6 +38,8 @@ let
       orgmode
       plenary-nvim
       sonokai
+      telescope-fzf-native-nvim
+      telescope-nvim
       vim-nftables
       vim-signify
     ];
@@ -46,13 +49,14 @@ let
   extraPackages = [
     bash-language-server
     clang-tools
+    fd
     gopls
     nixd
     nixfmt-rfc-style
     nodePackages.typescript-language-server
+    pkgs.verible
     pyright
     shellcheck
-    pkgs.verible
     zig
     zls
   ];

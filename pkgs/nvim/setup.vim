@@ -1,5 +1,4 @@
 set number
-let mapleader = " "
 
 tnoremap <A-h> <C-\><C-N><C-w>h
 tnoremap <A-j> <C-\><C-N><C-w>j

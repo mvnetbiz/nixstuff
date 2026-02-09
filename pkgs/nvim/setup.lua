@@ -1,3 +1,10 @@
+require('telescope').setup {
+}
+require('telescope').load_extension('fzf')
+
+local t = require('telescope.builtin')
+
+--
 vim.lsp.config('verible', {
     cmd = {'verible-verilog-ls', '--rules_config_search'},
 })
@@ -12,40 +19,6 @@ vim.lsp.enable({
   'ts_ls',
   'verible',
   'zls',
-})
-
--- Global mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
--- Use LspAttach autocommand to only map the following keys
--- after the language server attaches to the current buffer
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-  callback = function(ev)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-    -- Buffer local mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local opts = { buffer = ev.buf }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
-    vim.keymap.set('n', '<space>wl', function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, opts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-  end,
 })
 
 -- treesitter
@@ -93,10 +66,6 @@ require("neo-tree").setup {
     enabled = true
   }
 }
-vim.keymap.set('n', '<C-b>', '<cmd>Neotree focus buffers <cr>', {silent = true})
-vim.keymap.set('n', '<C-f>', '<cmd>Neotree focus filesystem <cr>', {silent = true})
-vim.keymap.set('n', '<C-n>', '<cmd>Neotree focus filesystem <cr>', {silent = true})
-vim.keymap.set('n', '<C-s>', '<cmd>Neotree focus git_status <cr>', {silent = true})
 
 -- bufferline
 require("bufferline").setup {}
@@ -114,7 +83,6 @@ require("aerial").setup({
     vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
   end,
 })
-vim.keymap.set("n", "<space>a", "<cmd>AerialToggle!<CR>")
 
 -- formatter
 conform = require("conform")
@@ -124,10 +92,60 @@ conform.setup({
   },
 })
 
-vim.keymap.set('n', '<space>f', function()
+function format()
   conform.format({
     async = true,
     lsp_format = "fallback",
-  }, function(err, did_edit)
+  },
+  function(err, did_edit)
   end)
-end)
+end
+
+vim.api.nvim_create_user_command('F', format, {})
+
+-- Global mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+vim.g.mapleader = " "
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<leader>a', '<cmd>AerialToggle!<CR>', { desc = 'Toggle outline' })
+vim.keymap.set('n', '<leader>ff', t.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>fg', t.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>fb', t.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>fh', t.help_tags, { desc = 'Telescope help tags' })
+vim.keymap.set('n', '<leader>F', format, { desc = 'Format buffer' })
+vim.keymap.set('n', '<C-b>', '<cmd>Neotree focus buffers <cr>', {silent = true})
+vim.keymap.set('n', '<C-f>', '<cmd>Neotree focus filesystem <cr>', {silent = true})
+vim.keymap.set('n', '<C-n>', '<cmd>Neotree focus filesystem <cr>', {silent = true})
+vim.keymap.set('n', '<C-s>', '<cmd>Neotree focus git_status <cr>', {silent = true})
+
+-- Use LspAttach autocommand to only map the following keys
+-- after the language server attaches to the current buffer
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
+    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
+    vim.keymap.set('n', '<leader>wl', function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, opts)
+    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+  end,
+})
+
