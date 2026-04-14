@@ -21,13 +21,6 @@ vim.lsp.enable({
   'zls',
 })
 
--- treesitter
-require('nvim-treesitter.configs').setup {
-  highlight = {
-    enable = true,
-  },
-}
-
 -- lualine
 require('lualine').setup {
   sections = {
