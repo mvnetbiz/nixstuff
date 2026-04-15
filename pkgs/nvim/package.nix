@@ -6,7 +6,6 @@
   fd,
   nixd,
   nixfmt,
-  pyright,
   shellcheck,
 }:
 (wrapNeovimUnstable neovim-unwrapped {
@@ -40,7 +39,6 @@
       fd
       nixd
       nixfmt
-      pyright
       shellcheck
     ];
   })
