@@ -27,6 +27,7 @@
     sonokai
     telescope-fzf-native-nvim
     telescope-nvim
+    venn-nvim
     vim-nftables
     vim-signify
   ];
