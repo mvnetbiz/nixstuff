@@ -4,11 +4,6 @@ require('telescope').load_extension('fzf')
 
 local t = require('telescope.builtin')
 
---
-vim.lsp.config('verible', {
-    cmd = {'verible-verilog-ls', '--rules_config_search'},
-})
-
 vim.lsp.enable({
   'bashls',
   'clangd',
@@ -17,7 +12,6 @@ vim.lsp.enable({
   'nixd',
   'pyright',
   'ts_ls',
-  'verible',
   'zls',
 })
 
@@ -168,3 +162,29 @@ function _G.Toggle_venn()
 end
 -- toggle keymappings for venn using <leader>v
 vim.api.nvim_set_keymap('n', '<leader>v', ":lua Toggle_venn()<CR>", { noremap = true})
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'verilog', 'systemverilog' },
+    callback = function(args)
+        local flagfilename = '.verible_flags'
+        local bufnr = args.buf
+
+        local root_dir = vim.fs.root(bufnr, { '.git', flagfilename })
+        if not root_dir then
+            root_dir = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
+        end
+
+        local cmd = { 'verible-verilog-ls', '--rules_config_search' }
+
+        local flagfile = vim.fs.joinpath(root_dir, flagfilename)
+        if vim.uv.fs_stat(flagfile) then
+            table.insert(cmd, '--flagfile=' .. flagfile)
+        end
+
+        vim.lsp.start({
+            name = 'verible',
+            cmd = cmd,
+            root_dir = root_dir,
+        }, { bufnr = bufnr })
+    end,
+})
