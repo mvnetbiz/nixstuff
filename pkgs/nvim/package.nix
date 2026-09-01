@@ -4,6 +4,7 @@
   neovim-unwrapped,
   bash-language-server,
   fd,
+  lua-language-server,
   nixd,
   nixfmt,
   shellcheck,
@@ -17,6 +18,7 @@
     gruvbox-nvim
     gruvbox-material
     guess-indent-nvim
+    lazydev-nvim
     lualine-lsp-progress
     lualine-nvim
     neo-tree-nvim
@@ -38,6 +40,7 @@
     runtimeDeps = old.runtimeDeps ++ [
       bash-language-server
       fd
+      lua-language-server
       nixd
       nixfmt
       shellcheck

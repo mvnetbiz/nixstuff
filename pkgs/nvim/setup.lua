@@ -4,10 +4,13 @@ require('telescope').load_extension('fzf')
 
 local t = require('telescope.builtin')
 
+require("lazydev").setup {}
+
 vim.lsp.enable({
   'bashls',
   'clangd',
   'elmls',
+  'lua_ls',
   'gopls',
   'nixd',
   'pyright',
