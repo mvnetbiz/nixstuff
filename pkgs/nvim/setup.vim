@@ -33,4 +33,4 @@ nnoremap <A-L> <C-w>L
 nmap <C-CR> :term <CR>
 nmap <leader>K :hide Man<CR>
 
-colorscheme gruvbox-material
+colorscheme bark
