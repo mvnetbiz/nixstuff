@@ -3,6 +3,10 @@ require("telescope").load_extension("fzf")
 
 local t = require("telescope.builtin")
 
+-- If ~/.local/share/nvim doesn't exist, neo-tree complains when trying to open
+-- its log file.
+pcall(vim.fn.mkdir, vim.fn.stdpath("data"), "p")
+
 require("lazydev").setup({})
 
 vim.lsp.enable({
