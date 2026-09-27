@@ -92,7 +92,7 @@ require("aerial").setup({
 local conform = require("conform")
 conform.setup({
   formatters_by_ft = {
-    python = { "black" },
+    python = { "autopep8", "black" },
   },
 })
 
