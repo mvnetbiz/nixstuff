@@ -17,6 +17,7 @@ vim.lsp.enable({
   "gopls",
   "nixd",
   "pyright",
+  "rust_analyzer",
   "ts_ls",
   "zls",
 })
